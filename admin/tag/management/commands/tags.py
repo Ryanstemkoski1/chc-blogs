@@ -17,10 +17,11 @@ class Command(BaseCommand):
   help ="tags"
   
   def handle(self, *args, **options):
-    category_ids = [113, 190, 255, 218, 123, 166]
+    category_ids = [212, 277, 278, 279, 303]
     
     per_page = 100
     page = 1
+    allindex = 0
     
     while True:
       
@@ -30,7 +31,7 @@ class Command(BaseCommand):
         'categories': ','.join(map(str, category_ids))
       }
       
-      school_age = 554
+      young_adult = 213
       
       response = requests.get(url, params=params)
       
@@ -39,15 +40,14 @@ class Command(BaseCommand):
         posts = response.json()
         
         for index, post in enumerate(posts):
-          print(index)
+          print(allindex)
           print(post['title'])
           
           post_id = post['id']
           tags = post['tags']
           
-          if school_age not in tags:
-            tags.append(school_age)
-          
+          if young_adult not in tags:
+            tags.append(young_adult)
           
           wordpress_url = f'https://childrenshealthcouncil.kinsta.cloud/wp-json/wp/v2/posts/{post_id}'
           payload = {
@@ -58,7 +58,8 @@ class Command(BaseCommand):
           
           if response.status_code == 200:
             print('Post updated successfully.')
-          
+            allindex = allindex + 1
+            
           else:
             print('Failed to update post.')
             FailedPost.objects.update_or_create(
