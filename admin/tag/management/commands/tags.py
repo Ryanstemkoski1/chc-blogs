@@ -17,17 +17,20 @@ class Command(BaseCommand):
   help ="tags"
   
   def handle(self, *args, **options):
+    category_ids = [113, 190, 255, 218, 123, 166]
+    
     per_page = 100
     page = 1
     
     while True:
+      
       params = {
         'per_page': per_page, 
         'page': page,
-        'categories': 191
+        'categories': ','.join(map(str, category_ids))
       }
       
-      young_child = 553
+      school_age = 554
       
       response = requests.get(url, params=params)
       
@@ -42,8 +45,8 @@ class Command(BaseCommand):
           post_id = post['id']
           tags = post['tags']
           
-          if young_child not in tags:
-            tags.append(young_child)
+          if school_age not in tags:
+            tags.append(school_age)
           
           
           wordpress_url = f'https://childrenshealthcouncil.kinsta.cloud/wp-json/wp/v2/posts/{post_id}'
@@ -62,7 +65,7 @@ class Command(BaseCommand):
               defaults={
                   'post_id': post_id,
               },
-              post_title=post.post_title
+              post_title=post['title']['rendered']
             )
             
         page += 1
