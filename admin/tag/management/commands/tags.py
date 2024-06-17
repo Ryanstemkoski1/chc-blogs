@@ -17,7 +17,7 @@ class Command(BaseCommand):
   help ="tags"
   
   def handle(self, *args, **options):
-    category_ids = [212, 277, 278, 279, 303]
+    category_ids = [283]
     
     per_page = 100
     page = 1
@@ -31,7 +31,7 @@ class Command(BaseCommand):
         'categories': ','.join(map(str, category_ids))
       }
       
-      young_adult = 213
+      young_adult = 419
       
       response = requests.get(url, params=params)
       

@@ -18,11 +18,15 @@ class Command(BaseCommand):
   
   def handle(self, *args, **options):
     cat_slugs = [
-      "resources-for-educators", 
-      "resources-for-educators-preteen", 
-      "resources-for-educators-school-age", 
-      "resources-for-educators-teen",
-      "resources-for-educators-young-child"
+      "parent-caregiver", 
+      "parenting", 
+      "parenting-preteen", 
+      "parenting-school-age", 
+      "parenting-teen", 
+      "parenting-young-adult", 
+      "parenting-young-child", 
+      "parenting-young-adults", 
+      "special-needs-parenting"
     ]
     
     cat_ids =[]
